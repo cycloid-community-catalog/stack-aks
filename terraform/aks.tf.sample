@@ -197,7 +197,7 @@ module "aks-node" {
 
   #. network_subnet_id (required):
   #+ ANetwork subnet ID that should be used by AKS nodes.
-  network_subnet_id = module.network.vnet_subnet_ids["${var.aks_cluster_name}-nodes"]
+  network_subnet_id = module.network.vnet_subnet_ids["nodes"]
 
   #. enable_node_public_ip (optional): false
   #+ Should be true if public IPs should be associated to AKS nodes.

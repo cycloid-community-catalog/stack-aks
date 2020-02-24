@@ -17,7 +17,7 @@ module "azure-network" {
   ]
   subnet_names        = [
     for subnet in var.subnets:
-    "${var.project}-${var.env}-${subnet.name}"
+    subnet.name
   ]
 
   tags = merge(local.merged_tags, {
