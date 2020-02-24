@@ -73,7 +73,7 @@ resource "azurerm_kubernetes_cluster" "aks-cluster" {
   addon_profile {
     oms_agent {
       enabled                    = var.enable_oms_agent
-      log_analytics_workspace_id = var.enable_oms_agent ? azurerm_log_analytics_workspace.aks-cluster.id : null
+      log_analytics_workspace_id = var.enable_oms_agent ? azurerm_log_analytics_workspace.aks-cluster[0].id : null
     }
 
     kube_dashboard {
