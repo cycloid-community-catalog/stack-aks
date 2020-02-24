@@ -1,10 +1,10 @@
 resource "azurerm_network_security_group" "aks-nodes" {
-  name                = "${var.cluster_name}-nodes"
+  name                = "${var.project}-${var.env}-nodes"
   location            = var.location
   resource_group_name = var.resource_group_name
 
   security_rule {
-    name                       = "${var.cluster_name}-inbound-ssh"
+    name                       = "inbound-ssh"
     priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
@@ -16,7 +16,7 @@ resource "azurerm_network_security_group" "aks-nodes" {
   }
 
   security_rule {
-    name                       = "${var.cluster_name}-inbound-metrics"
+    name                       = "inbound-metrics"
     priority                   = 101
     direction                  = "Inbound"
     access                     = "Allow"
@@ -28,10 +28,10 @@ resource "azurerm_network_security_group" "aks-nodes" {
   }
 
   tags = merge(local.merged_tags, {
-    name = "${var.cluster_name}-nodes"
+    name = "${var.project}-${var.env}-nodes"
   })
 
   depends_on = [
-    "module.azure-network"
+    module.azure-network
   ]
 }
