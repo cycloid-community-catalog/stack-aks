@@ -36,24 +36,28 @@ resource "azurerm_kubernetes_cluster" "aks-cluster" {
   dynamic "network_profile" {
     for_each = var.network_plugin == "azure" ? [1] : []
 
-    network_plugin     = "azure"
-    network_policy     = var.network_policy_plugin
-    dns_service_ip     = cidrhost(var.network_service_cidr, 10)
-    docker_bridge_cidr = var.network_docker_bridge_cidr
-    service_cidr       = var.network_service_cidr
+    content {
+      network_plugin     = "azure"
+      network_policy     = var.network_policy_plugin
+      dns_service_ip     = cidrhost(var.network_service_cidr, 10)
+      docker_bridge_cidr = var.network_docker_bridge_cidr
+      service_cidr       = var.network_service_cidr
 
-    # Required for availability zones
-    load_balancer_sku = var.network_load_balancer_sku # standard
+      # Required for availability zones
+      load_balancer_sku = var.network_load_balancer_sku # standard
+    }
   }
 
   dynamic "network_profile" {
     for_each = var.network_plugin == "kubenet" ? [1] : []
 
-    network_plugin = "kubenet"
-    pod_cidr       = var.network_pod_cidr
+    content {
+      network_plugin = "kubenet"
+      pod_cidr       = var.network_pod_cidr
 
-    # Required for availability zones
-    load_balancer_sku = var.network_load_balancer_sku # standard
+      # Required for availability zones
+      load_balancer_sku = var.network_load_balancer_sku # standard
+    }
   }
 
   enable_pod_security_policy = var.enable_pod_security_policy
@@ -64,9 +68,11 @@ resource "azurerm_kubernetes_cluster" "aks-cluster" {
     dynamic "azure_active_directory" {
       for_each = var.rbac_use_active_directory ? [1] : []
 
-      client_app_id       = var.rbac_client_app_id
-      server_app_id       = var.rbac_server_app_id
-      server_app_secret   = var.rbac_client_app_secret
+      content {
+        client_app_id       = var.rbac_client_app_id
+        server_app_id       = var.rbac_server_app_id
+        server_app_secret   = var.rbac_client_app_secret
+      }
     }
   }
 
