@@ -12,7 +12,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "example" {
   max_count           = var.node_max_count
   min_count           = var.node_min_count
 
-  availability_zones    = length(var.availability_zones) > 0 : var.availability_zones : null
+  availability_zones    = length(var.availability_zones) > 0 ? var.availability_zones : null
   enable_node_public_ip = var.enable_node_public_ip
   max_pods              = var.node_max_pods
   node_taints           = var.node_taints

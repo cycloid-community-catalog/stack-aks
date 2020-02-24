@@ -62,7 +62,7 @@ resource "azurerm_kubernetes_cluster" "aks-cluster" {
     enabled               = var.enable_rbac
 
     dynamic "azure_active_directory" {
-      for_each = var.rbac_use_active_directory : [1] : []
+      for_each = var.rbac_use_active_directory ? [1] : []
 
       client_app_id       = var.rbac_client_app_id
       server_app_id       = var.rbac_server_app_id
