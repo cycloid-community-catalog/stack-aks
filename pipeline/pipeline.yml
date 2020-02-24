@@ -49,6 +49,8 @@ resources:
       storage_account_name: ((azure_storage_account_name))
       access_key: ((azure_storage_account_key))
     vars:
+      aks_service_principal_client_id: ((aks_service_principal_client_id))
+      aks_service_principal_client_secret: ((aks_service_principal_client_secret))
       azure_location: ((azure_location))
       azure_env: ((azure_env))
       azure_client_id: ((azure_client_id))
