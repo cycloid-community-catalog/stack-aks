@@ -3,6 +3,11 @@ output "cluster_id" {
   value       = azurerm_kubernetes_cluster.aks-cluster.id
 }
 
+output "cluster_name" {
+  description = "AKS Cluster ID."
+  value       = azurerm_kubernetes_cluster.aks-cluster.name
+}
+
 output "cluster_public_fqdn" {
   description = "EKS Cluster public FQDN."
   value       = azurerm_kubernetes_cluster.aks-cluster.fqdn
