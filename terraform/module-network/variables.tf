@@ -48,25 +48,13 @@ variable "address_space" {
 
 variable "subnets" {
   description = "The private subnets for the VPC."
-  default     = [
-    {
-      name = "nodes",
-      address_prefix = "10.8.0.0/16",
-    },
-    {
-      name = "pods",
-      address_prefix = "10.9.0.0/16",
-    },
+  default     = {
+    "nodes" = "10.8.0.0/16",
+    "pods"  = "10.9.0.0/16",
     # Azure don't like Terraform to create the service subnet used by AKS so we should skip it
-    # {
-    #   name = "services",
-    #   address_prefix = "10.10.0.0/16",
-    # },
-    {
-      name = "loadbalancers",
-      address_prefix = "10.11.0.0/16",
-    },
-  ]
+    # "services" = "10.10.0.0/16",
+    "loadbalancers" = "10.11.0.0/16",
+  }
 }
 
 variable "ssh_allowed_ips" {

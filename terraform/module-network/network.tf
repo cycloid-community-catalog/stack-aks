@@ -12,12 +12,12 @@ module "azure-network" {
   vnet_name           = "${var.project}-${var.env}-vnet"
   address_space       = var.address_space
   subnet_prefixes     = [
-    for subnet in var.subnets:
-    subnet.address_prefix
+    for name, prefix in var.subnets:
+    prefix
   ]
   subnet_names        = [
-    for subnet in var.subnets:
-    subnet.name
+    for name, prefix in var.subnets:
+    name
   ]
 
   tags = merge(local.merged_tags, {
@@ -25,12 +25,12 @@ module "azure-network" {
   })
 }
 
-# resource "azurerm_subnet" "subnet" {
-#   for_each = var.subnets
+resource "azurerm_subnet" "aks" {
+  for_each = var.subnets
 
-#   name                      = "${var.project}-${var.env}-${each.value.name}"
-#   address_prefix            = each.value.address_prefix
-#   resource_group_name       = var.resource_group_name
-#   virtual_network_name      = module.azure-network.vnet_name
-#   network_security_group_id = azurerm_network_security_group.aks-nodes.id
-# }
+  name                      = each.key
+  address_prefix            = each.value
+  resource_group_name       = var.resource_group_name
+  virtual_network_name      = module.azure-network.vnet_name
+  network_security_group_id = each.key == "nodes" ? azurerm_network_security_group.aks-nodes.id : null 
+}

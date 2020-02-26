@@ -7,6 +7,12 @@ locals {
 resource "azurerm_resource_group" "aks" {
   name     = "${var.project}-${var.env}-aks"
   location = var.azure_location
+  tags     = {
+    "project"    = var.project,
+    "env"        = var.env,
+    "customer"   = var.customer,
+    "cycloid.io" = "true",
+  }
 }
 
 # By default this stack will create a dedicated network for the AKS Cluster
@@ -41,27 +47,15 @@ module "network" {
   #+ The virtual network address space.
   address_space = "10.8.0.0/14"
 
-  #. subnets (optional, list): [{name = "nodes",address_prefix = "10.8.0.0/16",},{name = "pods", address_prefix = "10.9.0.0/16",},{name = "loadbalancers", address_prefix = "10.11.0.0/16",},]
+  #. subnets (optional, list): {"nodes" = "10.8.0.0/16", "pods"  = "10.9.0.0/16", "loadbalancers" = "10.11.0.0/16",}
   #+ The private subnets for the VPC.
-  subnets = [
-    {
-      name = "nodes",
-      address_prefix = "10.8.0.0/16",
-    },
-    {
-      name = "pods",
-      address_prefix = "10.9.0.0/16",
-    },
+  subnets = {
+    "nodes" = "10.8.0.0/16",
+    "pods"  = "10.9.0.0/16",
     # Azure don't like Terraform to create the service subnet used by AKS so we should skip it
-    # {
-    #   name = "services",
-    #   address_prefix = "10.10.0.0/16",
-    # },
-    {
-      name = "loadbalancers",
-      address_prefix = "10.11.0.0/16",
-    },
-  ]
+    # "services" = "10.10.0.0/16",
+    "loadbalancers" = "10.11.0.0/16",
+  }
 
   #. ssh_allowed_ips (optional): ["*"]
   #+ Allow Inbound IP CIDRs to access the instances via SSH.
