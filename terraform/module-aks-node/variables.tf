@@ -49,7 +49,7 @@ variable "cluster_id" {
 #
 
 variable "node_pool_name" {
-  description = "AKS nodes pool given name."
+  description = "AKS node pool given name."
   default     = "standard"
 }
 

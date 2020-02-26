@@ -12,12 +12,23 @@ resource "azurerm_kubernetes_cluster" "aks-cluster" {
   api_server_authorized_ip_ranges = var.cluster_allowed_ips
 
   default_node_pool {
-    name           = "default"
-    node_count     = 0
-    vm_size        = "Standard_D1_v2"
+    name           = "${var.cluster_name}-node-${var.node_pool_name}"
+    vm_size        = var.node_size
+    node_count     = var.node_count
+
+    enable_auto_scaling = var.node_enable_auto_scaling
+    min_count           = var.node_min_count
+    max_count           = var.node_max_count
+
+    availability_zones    = length(var.node_availability_zones) > 0 ? var.node_availability_zones : null
+    enable_node_public_ip = var.node_enable_public_ip
+    max_pods              = var.node_max_pods
+    node_taints           = var.node_taints
+    os_disk_size_gb       = var.node_disk_size
+    type                  = var.node_pool_type # VirtualMachineScaleSets
 
     # Required for advanced networking
-    # vnet_subnet_id = var.network_plugin == "azure" ? var.vnet_subnet_id : null
+    vnet_subnet_id = var.network_plugin == "azure" ? var.node_network_subnet_id : null
   }
 
   service_principal {

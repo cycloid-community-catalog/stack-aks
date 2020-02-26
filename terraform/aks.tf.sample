@@ -162,6 +162,53 @@ module "aks" {
   #+ Should be `true` to enable the Kubernetes Dashboard.
 
   ###
+  # Default Nodes Pool
+  ###
+
+  #. node_pool_name (optional): default
+  #+ AKS default nodes pool given name.
+  node_pool_name = "default"
+
+  #. node_pool_type (optional): Linux
+  #+ AKS default nodes pool type, can be either `AvailabilitySet` or `VirtualMachineScaleSets`.
+
+  #. node_availability_zones (optional): []
+  #+ To use specific Azure Availability Zones for the default nodes pool. @see https://docs.microsoft.com/en-us/azure/availability-zones/az-overview
+
+  #. node_network_subnet_id (required):
+  #+ Network subnet ID that should be used by AKS default nodes.
+  node_network_subnet_id = module.network.vnet_subnet_ids["nodes"]
+
+  #. node_enable_public_ip (optional): false
+  #+ Should be true if public IPs should be associated to AKS default nodes.
+
+  #. node_size (optional): Standard_DS2_v2
+  #+ AKS default nodes virtualmachine size.
+  node_size = "Standard_DS2_v2"
+
+  #. node_count (optional): 1
+  #+ AKS default nodes desired count.
+  node_count = "1"
+
+  #. node_enable_auto_scaling (optional): true
+  #+ Enable auto scaling of AKS default nodes.
+
+  #. node_min_count (optional): 1
+  #+ AKS default nodes auto scaling minimum count.
+
+  #. node_max_count (optional): 10
+  #+ AKS default nodes auto scaling group maximum count.
+
+  #. node_disk_size (optional): 60
+  #+ AKS default nodes root disk size.
+
+  #. node_max_pods (optional): 250
+  #+ Maximum number of pods per AKS default node (can't be more than 250).
+
+  #. node_taints (optional): []
+  #+ AKS nodes taints to setup.
+
+  ###
   # Required (should probably not be touched)
   ###
 
@@ -196,7 +243,7 @@ module "aks-node" {
   ###
 
   #. network_subnet_id (required):
-  #+ ANetwork subnet ID that should be used by AKS nodes.
+  #+ Network subnet ID that should be used by AKS nodes.
   network_subnet_id = module.network.vnet_subnet_ids["nodes"]
 
   #. enable_node_public_ip (optional): false

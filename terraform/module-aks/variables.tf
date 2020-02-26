@@ -163,3 +163,70 @@ variable "enable_kube_dashboard" {
   description = "Should be `true` to enable the Kubernetes Dashboard."
   default     = false
 }
+
+#
+# Default Node Pool
+#
+variable "node_pool_name" {
+  description = "AKS default nodes pool given name."
+  default     = "default"
+}
+
+variable "node_pool_type" {
+  description = "AKS nodes pool type, can be either `AvailabilitySet` or `VirtualMachineScaleSets`."
+  default     = "VirtualMachineScaleSets"
+}
+
+variable "node_availability_zones" {
+  description = "To use specific Azure Availability Zones for the default nodes pool. @see https://docs.microsoft.com/en-us/azure/availability-zones/az-overview"
+  default     = []
+}
+
+variable "node_network_subnet_id" {
+  description = "Network subnet ID that should be used by AKS default nodes."
+}
+
+variable "node_enable_public_ip" {
+  description = "Should be true if public IPs should be associated to AKS default nodes."
+  default     = false
+}
+
+variable "node_size" {
+  description = "AKS default nodes virtualmachine size."
+  default     = "Standard_DS2_v2"
+}
+
+variable "node_count" {
+  description = "AKS default nodes desired count."
+  default     = 1
+}
+
+variable "node_enable_auto_scaling" {
+  description = "Enable auto scaling of AKS default nodes."
+  default     = true
+}
+
+variable "node_min_count" {
+  description = "AKS default nodes auto scaling minimum count."
+  default     = 1
+}
+
+variable "node_max_count" {
+  description = "AKS default nodes auto scaling group maximum count."
+  default     = 10
+}
+
+variable "node_disk_size" {
+  description = "AKS default nodes root disk size."
+  default     = "60"
+}
+
+variable "node_max_pods" {
+  description = "Maximum number of pods per AKS default node (can't be more than 250)."
+  default     = "250"
+}
+
+variable "node_taints" {
+  description = "AKS default nodes taints to setup."
+  default     = []
+}
