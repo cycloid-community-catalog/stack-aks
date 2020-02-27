@@ -11,7 +11,8 @@ resource "azurerm_network_security_group" "aks-nodes" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
-    source_address_prefixes    = var.ssh_allowed_ips
+    source_address_prefix      = length(var.ssh_allowed_ips) == 1 ? var.ssh_allowed_ips[0] : null
+    source_address_prefixes    = length(var.ssh_allowed_ips) > 1 ? var.ssh_allowed_ips : null
     destination_address_prefix = "*"
   }
 
@@ -23,7 +24,8 @@ resource "azurerm_network_security_group" "aks-nodes" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "9100"
-    source_address_prefixes    = var.metrics_allowed_ips
+    source_address_prefix      = length(var.metrics_allowed_ips) == 1 ? var.metrics_allowed_ips[0] : null
+    source_address_prefixes    = length(var.metrics_allowed_ips) > 1 ? var.metrics_allowed_ips : null
     destination_address_prefix = "*"
   }
 
