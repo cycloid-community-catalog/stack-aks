@@ -3,7 +3,7 @@
 #
 
 resource "azurerm_kubernetes_cluster_node_pool" "example" {
-  name                  = "${var.cluster_name}-node-${var.node_pool_name}"
+  name                  = lower(substr(var.node_pool_name, 0, 12))
   kubernetes_cluster_id = var.cluster_id
   vm_size               = var.node_size
   node_count            = var.node_count
