@@ -36,11 +36,15 @@ resource "azurerm_kubernetes_cluster" "aks-cluster" {
     client_secret = var.service_principal_client_secret
   }
 
-  linux_profile {
-    admin_username  = var.node_admin_username
+  dynamic "linux_profile" {
+    for_each = var.node_ssh_key != "" ? [1] : []
 
-    ssh_key {
-      key_data = var.node_ssh_key
+    content {
+      admin_username  = var.node_admin_username
+
+      ssh_key {
+        key_data = var.node_ssh_key
+      }
     }
   }
 
