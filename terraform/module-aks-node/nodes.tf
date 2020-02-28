@@ -2,7 +2,7 @@
 # Node pool
 #
 
-resource "azurerm_kubernetes_cluster_node_pool" "example" {
+resource "azurerm_kubernetes_cluster_node_pool" "aks-nodes" {
   name                  = lower(substr(var.node_pool_name, 0, 12))
   kubernetes_cluster_id = var.cluster_id
   vm_size               = var.node_size
