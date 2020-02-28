@@ -115,8 +115,8 @@ variable "node_ssh_key" {
 }
 
 variable "enable_pod_security_policy" {
-  description = "Should be `true` to enable Pod Security Policies."
-  default     = true
+  description = "Should be `true` to enable Pod Security Policies. Pod Security Policies needs to be enabled via the Azure CLI. @see https://github.com/Azure/AKS/blob/master/previews.md#kubernetes-pod-security-policies-"
+  default     = false
 }
 
 variable "enable_rbac" {

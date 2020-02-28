@@ -125,8 +125,8 @@ module "aks" {
   #. node_ssh_key (optional): ""
   #+ AKS node admin SSH key for SSH connection.
 
-  #. enable_pod_security_policy (optional): true
-  #+ Should be `true` to enable Pod Security Policies.
+  #. enable_pod_security_policy (optional): false
+  #+ Should be `true` to enable Pod Security Policies. Pod Security Policies needs to be enabled via the Azure CLI. @see https://github.com/Azure/AKS/blob/master/previews.md#kubernetes-pod-security-policies-
 
   #. enable_rbac (optional): true
   #+ Should be `true` to enable Role Based Access Control.
@@ -226,13 +226,6 @@ module "aks-node" {
   #####################################
 
   ###
-  # General
-  ###
-
-  #. availability_zones (optional): []
-  #+ To use specific Azure Availability Zones. @see https://docs.microsoft.com/en-us/azure/availability-zones/az-overview
-
-  ###
   # Networking
   ###
 
@@ -250,6 +243,9 @@ module "aks-node" {
   #. node_pool_name (optional): standard
   #+ AKS nodes pool given name.
   node_pool_name = "standard"
+
+  #. node_availability_zones (optional): []
+  #+ To use specific Azure Availability Zones for the nodes pool. @see https://docs.microsoft.com/en-us/azure/availability-zones/az-overview
 
   #. node_size (optional): Standard_DS2_v2
   #+ AKS nodes virtualmachine size.
@@ -272,7 +268,7 @@ module "aks-node" {
   #+ AKS nodes root disk size.
 
   #. node_os_type (optional): Linux
-  #+ AKS nodes OS type, can be either `Linux` or `Windows`.
+  #+ AKS nodes OS type, can be either `Linux` or `Windows`. Windows pool nodes needs to be enabled via the Azure CLI. @see https://github.com/Azure/AKS/blob/master/previews.md#windows-worker-nodes-
 
   #. node_max_pods (optional): 250
   #+ Maximum number of pods per AKS node (can't be more than 250).

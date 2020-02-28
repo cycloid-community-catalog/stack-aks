@@ -14,11 +14,6 @@ variable "customer" {
   description = "Cycloid customer name."
 }
 
-variable "availability_zones" {
-  description = "To use specific Azure Availability Zones. @see https://docs.microsoft.com/en-us/azure/availability-zones/az-overview"
-  default     = []
-}
-
 #
 # Networking
 #
@@ -53,6 +48,11 @@ variable "node_pool_name" {
   default     = "standard"
 }
 
+variable "node_availability_zones" {
+  description = "To use specific Azure Availability Zones for the nodes pool. @see https://docs.microsoft.com/en-us/azure/availability-zones/az-overview"
+  default     = []
+}
+
 variable "node_size" {
   description = "AKS nodes virtualmachine size."
   default     = "Standard_DS2_v2"
@@ -84,7 +84,7 @@ variable "node_disk_size" {
 }
 
 variable "node_os_type" {
-  description = "AKS nodes OS type, can be either `Linux` or `Windows`."
+  description = "AKS nodes OS type, can be either `Linux` or `Windows`. Windows pool nodes needs to be enabled via the Azure CLI. @see https://github.com/Azure/AKS/blob/master/previews.md#windows-worker-nodes-"
   default     = "Linux"
 }
 
