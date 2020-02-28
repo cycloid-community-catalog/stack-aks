@@ -32,5 +32,9 @@ resource "azurerm_subnet" "aks" {
   address_prefix            = each.value
   resource_group_name       = var.resource_group_name
   virtual_network_name      = module.azure-network.vnet_name
-  network_security_group_id = each.key == "nodes" ? azurerm_network_security_group.aks-nodes.id : null 
+}
+
+resource "azurerm_subnet_network_security_group_association" "aks-nodes" {
+  subnet_id                 = azurerm_subnet.aks["nodes"].id
+  network_security_group_id = azurerm_network_security_group.aks-nodes.id
 }
