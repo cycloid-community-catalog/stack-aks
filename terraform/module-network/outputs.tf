@@ -15,7 +15,10 @@ output "vnet_location" {
 
 output "vnet_subnet_ids" {
   description = "AKS Cluster dedicated vNet subnet IDs."
-  value       = module.azure-network.vnet_subnets
+  value       = {
+    for subnet in azurerm_subnet.aks:
+    subnet.name => subnet.id
+  }
 }
 
 output "vnet_address_space" {

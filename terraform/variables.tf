@@ -42,3 +42,11 @@ variable "azure_location" {
 locals {
   aks_cluster_name = length(local.cluster_name) > 0 ? lower(local.cluster_name) : lower("${var.project}-${var.env}")
 }
+
+variable "aks_service_principal_client_id" {
+  description = "The Client ID for the Service Principal used by the AKS cluster."
+}
+
+variable "aks_service_principal_client_secret" {
+  description = "The Client Secret for the Service Principal used by the AKS cluster."
+}
