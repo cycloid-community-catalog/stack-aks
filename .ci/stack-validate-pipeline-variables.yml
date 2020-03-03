@@ -29,6 +29,8 @@ terraform_env_vars:
   TF_VAR_azure_client_secret: ((raw_azure-terraform-app.client_secret))
   TF_VAR_azure_subscription_id: ((raw_azure-terraform-app.subscription_id))
   TF_VAR_azure_tenant_id: ((raw_azure-terraform-app.tenant_id))
+  TF_VAR_aks_service_principal_client_id: ((raw_azure-terraform-app.client_id))
+  TF_VAR_aks_service_principal_client_secret: ((raw_azure-terraform-app.client_secret))
   # ACTION_ARGS could be plan or validate
   ACTION_ARGS: plan
 
@@ -44,6 +46,10 @@ pipeline_env_vars:
   PIPELINE_VARIABLES: variables.sample.yml
   # Where to create the pipeline
   ORGANIZATION: cycloid-owl
+  # Which project to use for pipeline
+  PROJECT: ci-stack-aks
+  # Which environment to use for pipeline
+  ENVIRONMENT: master
   # Tmp name to create the pipeline
   PIPELINE_NAME: ci-stack-aks-master-validate
 
