@@ -16,7 +16,7 @@ output "vnet_location" {
 
 output "vnet_subnet_ids" {
   description = "AKS Cluster dedicated vNet subnet IDs."
-  value       = module.network.vnet_subnets
+  value       = module.network.vnet_subnet_ids
 }
 
 output "vnet_address_space" {
@@ -36,6 +36,11 @@ output "cluster_id" {
   value       = module.aks.cluster_id
 }
 
+output "cluster_name" {
+  description = "AKS Cluster name."
+  value       = module.aks.cluster_name
+}
+
 output "cluster_public_fqdn" {
   description = "AKS Cluster public FQDN."
   value       = module.aks.cluster_public_fqdn
@@ -46,14 +51,14 @@ output "cluster_private_fqdn" {
   value       = module.aks.cluster_private_fqdn
 }
 
-output "control_plane_host" {
+output "cluster_host" {
   description = "AKS Cluster kubeconfig host."
-  value       = module.aks.control_plane_host
+  value       = module.aks.cluster_host
 }
 
-output "control_plane_ca" {
+output "cluster_ca" {
   description = "AKS Cluster certificate authority."
-  value       = module.aks.control_plane_ca
+  value       = module.aks.cluster_ca
 }
 
 output "kubeconfig" {
