@@ -1,6 +1,7 @@
 # Configuration of the CI pipeline
 name: 'Azure AKS'
 canonical: 'stack-aks'
+status: 'public'
 description: 'Used to deploy an Azure Kubernetes Service cluster with one or more node pools.'
 keywords:
   - 'kubernetes'
