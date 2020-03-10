@@ -47,7 +47,7 @@ resources:
       key: ((terraform_storage_container_path))/((project))-((env)).tfstate
       resource_group_name: ((terraform_resource_group_name))
       storage_account_name: ((terraform_storage_account_name))
-      access_key: ((terraform_storage_account_key))
+      access_key: ((terraform_storage_access_key))
     vars:
       aks_service_principal_client_id: ((aks_service_principal_client_id))
       aks_service_principal_client_secret: ((aks_service_principal_client_secret))

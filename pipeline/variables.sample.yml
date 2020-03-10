@@ -52,9 +52,9 @@ terraform_resource_group_name: ($ organization_canonical $)-terraform
 #+ Azure Storage Account name to use to store terraform remote state file.
 terraform_storage_account_name: ((azure_storage_aks.account_name))
 
-#. terraform_storage_account_key (required): ((azure_storage_aks.account_key))
+#. terraform_storage_account_key (required): ((azure_storage_aks.access_key))
 #+ Azure Storage Account key to use to store terraform remote state file.
-terraform_storage_account_key: ((azure_storage_aks.account_key))
+terraform_storage_access_key: ((azure_storage_aks.access_key))
 
 #. terraform_storage_container_name (required): ($ organization_canonical $)
 #+ Azure Storage container name to store terraform remote state file.
