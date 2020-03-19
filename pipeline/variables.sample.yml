@@ -31,16 +31,16 @@ azure_location: "West Europe"
 # AKS
 # The cluster needs a Service Principal that you can create with the following Azure CLI command:
 # `az ad sp create-for-rbac --name ($ project $)-($ environment $)`
-# Then create a `raw_($ project $)-($ environment $)-sp` Cycloid RAW Credential
+# Then create a `custom_($ project $)-($ environment $)-sp` Cycloid custom Credential
 # with two fields `client_id` and `client_secret` referencing the newly created Service Principal.
 
-#. aks_service_principal_client_id (required): ((raw_($ project $)-($ environment $)-sp.client_id))
+#. aks_service_principal_client_id (required): ((custom_($ project $)-($ environment $)-sp.client_id))
 #+ The Client ID for the Service Principal used by the AKS cluster.
-aks_service_principal_client_id: ((raw_($ project $)-($ environment $)-sp.client_id))
+aks_service_principal_client_id: ((custom_($ project $)-($ environment $)-sp.client_id))
 
-#. aks_service_principal_client_secret (required): ((raw_($ project $)-($ environment $)-sp.client_secret))
+#. aks_service_principal_client_secret (required): ((custom_($ project $)-($ environment $)-sp.client_secret))
 #+ The Client Secret for the Service Principal used by the AKS cluster.
-aks_service_principal_client_secret: ((raw_($ project $)-($ environment $)-sp.client_secret))
+aks_service_principal_client_secret: ((custom_($ project $)-($ environment $)-sp.client_secret))
 
 # Azure access to store terraform remote state file.
 
@@ -77,9 +77,9 @@ config_git_repository: git@github.com:MyUser/config-aks.git
 #+ Branch of the config Git repository.
 config_git_branch: master
 
-#. config_git_private_key (required): ((git_config.ssh_key))
+#. config_git_private_key (required): ((ssh_config.ssh_key))
 #+ SSH key pair to fetch the config Git repository.
-config_git_private_key: ((git_config.ssh_key))
+config_git_private_key: ((ssh_config.ssh_key))
 
 
 #
