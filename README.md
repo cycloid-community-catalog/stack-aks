@@ -43,8 +43,8 @@ In order to run this task, couple elements are required within the infrastructur
 
 |Name|Description|Type|Default|Required|
 |---|---|:---:|:---:|:---:|
-|`aks_service_principal_client_id`|The Client ID for the Service Principal used by the AKS cluster.|`-`|`((raw_($ project $)-($ environment $)-sp.client_id))`|`True`|
-|`aks_service_principal_client_secret`|The Client Secret for the Service Principal used by the AKS cluster.|`-`|`((raw_($ project $)-($ environment $)-sp.client_secret))`|`True`|
+|`aks_service_principal_client_id`|The Client ID for the Service Principal used by the AKS cluster.|`-`|`((custom_($ project $)-($ environment $)-sp.client_id))`|`True`|
+|`aks_service_principal_client_secret`|The Client Secret for the Service Principal used by the AKS cluster.|`-`|`((custom_($ project $)-($ environment $)-sp.client_secret))`|`True`|
 |`azure_client_id`|Azure client ID to use for Terraform.|`-`|`((azure_admin.client_id))`|`True`|
 |`azure_client_secret`|Azure client secret to use for Terraform.|`-`|`((azure_admin.client_secret))`|`True`|
 |`azure_env`|Azure environment to use for Terraform. Can be either `public`, `usgovernment`, `german` or `china`.|`-`|`public`|`True`|
@@ -52,7 +52,7 @@ In order to run this task, couple elements are required within the infrastructur
 |`azure_subscription_id`|Azure subscription ID to use for Terraform.|`-`|`((azure_admin.subscription_id))`|`True`|
 |`azure_tenant_id`|Azure tenant ID to use for Terraform.|`-`|`((azure_admin.tenant_id))`|`True`|
 |`config_git_branch`|Branch of the config Git repository.|`-`|`master`|`True`|
-|`config_git_private_key`|SSH key pair to fetch the config Git repository.|`-`|`((git_config.ssh_key))`|`True`|
+|`config_git_private_key`|SSH key pair to fetch the config Git repository.|`-`|`((ssh_config.ssh_key))`|`True`|
 |`config_git_repository`|Git repository URL containing the config of the stack.|`-`|`git@github.com:MyUser/config-aks.git`|`True`|
 |`config_terraform_path`|Path of Terraform files in the config git repository|`-`|`($ project $)/terraform/($ environment $)`|`True`|
 |`customer`|Name of the Cycloid Organization, used as customer variable name.|`-`|`($ organization_canonical $)`|`True`|

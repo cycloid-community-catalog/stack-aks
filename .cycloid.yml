@@ -1,18 +1,21 @@
-# Configuration of the CI pipeline
+---
+# Configuration of the Cycloid stack
 name: 'Azure AKS'
 canonical: 'stack-aks'
 status: 'public'
-description: 'Used to deploy an Azure Kubernetes Service cluster with one or more node pools.'
+description: |
+  Used to deploy an Azure Kubernetes Service cluster with one or more node pools.
 keywords:
   - 'kubernetes'
   - 'aks'
   - 'provider:azure'
 author: 'Cycloid'
-image: 'https://raw.githubusercontent.com/cycloid-community-catalog/stack-aks/master/icon.png'
-type: 'stack'
+image: |
+  https://raw.githubusercontent.com/cycloid-community-catalog/stack-aks/master/icon.png
 technologies:
   - technology: Azure Kubernetes Service
     version: latest
+
 config:
   # Configuration of the CI pipeline
   pipeline:
